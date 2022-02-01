@@ -1,8 +1,8 @@
-import React, { useReducer } from 'react';
-import axios from 'axios';
-import AuthContext from './authContext';
-import AuthReducer from './authReducer';
-import setAuthToken from '../../utils/setAuthToken';
+import React, { useReducer } from "react";
+import axios from "axios";
+import AuthContext from "./authContext";
+import AuthReducer from "./authReducer";
+import setAuthToken from "../../utils/setAuthToken";
 import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
@@ -12,11 +12,11 @@ import {
   LOGIN_FAIL,
   LOGOUT,
   CLEAR_ERRORS,
-} from '../Types';
+} from "../Types";
 
 const AuthState = (props) => {
   const initialState = {
-    token: localStorage.getItem('token'),
+    token: localStorage.getItem("token"),
     isAuthenticated: null,
     loading: true,
     error: null,
@@ -31,7 +31,7 @@ const AuthState = (props) => {
     }
 
     try {
-      const res = await axios.get('/api/auth');
+      const res = await axios.get("grootmart-service.herokuapp.com/api/auth");
 
       dispatch({
         type: USER_LOADED,
@@ -46,11 +46,15 @@ const AuthState = (props) => {
   const register = async (formData) => {
     const config = {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     };
     try {
-      const res = await axios.post('/api/users', formData, config);
+      const res = await axios.post(
+        "grootmart-service.herokuapp.com/api/users",
+        formData,
+        config
+      );
 
       dispatch({
         type: REGISTER_SUCCESS,
@@ -70,12 +74,16 @@ const AuthState = (props) => {
   const login = async (formData) => {
     const config = {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     };
 
     try {
-      const res = await axios.post('/api/auth', formData, config);
+      const res = await axios.post(
+        "grootmart-service.herokuapp.com/api/auth",
+        formData,
+        config
+      );
 
       dispatch({
         type: LOGIN_SUCCESS,
